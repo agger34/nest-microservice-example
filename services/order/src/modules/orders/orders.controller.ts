@@ -11,7 +11,7 @@ import {
   ApiResponse,
   ApiTags
 } from '@nestjs/swagger';
-import { OrderStateConst } from '../shared/constants/order-state';
+import { OrderStateConst } from '../shared/constants/order-state.const';
 
 @ApiTags('orders')
 @Controller('orders')

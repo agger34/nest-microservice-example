@@ -3,7 +3,7 @@ import { CommandBus } from "@nestjs/cqrs";
 import { EventPattern } from "@nestjs/microservices";
 import * as clc from 'cli-color';
 import { UpdateOrderCommand } from "../orders/commands/impl/update-order.command";
-import { OrderStateConst } from "../shared/constants/order-state";
+import { OrderStateConst } from "../shared/constants/order-state.const";
 import { PaymentMessagePattern } from "../shared/enum/payment.enum";
 import { PaymentEventModel } from "./eventModels/payment-event-model";
 
