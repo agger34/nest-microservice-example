@@ -1,0 +1,4 @@
+export enum PaymentMessagePattern {
+  PAYMENT_CONFIRMED = 'PAYMENT_CONFIRMED',
+  PAYMENT_DECLINED = 'PAYMENT_DECLINED',
+}
