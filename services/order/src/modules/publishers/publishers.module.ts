@@ -13,7 +13,7 @@ const configService = new ConfigService(`.env.${process.env.NODE_ENV}`);
         transport: Transport.RMQ,
         options: {
           urls: [configService.get('RABBITMQ_URL')],
-          queue: QueueConst.PAYMENT_QUEUE
+          queue: QueueConst.PAYMENT_QUEUE,
         },
       },
     ]),

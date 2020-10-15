@@ -12,11 +12,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.connectMicroservice({
-      transport: Transport.RMQ,
-      options: {
-        urls: [configService.get('RABBITMQ_URL')],
-        queue: QueueConst.ORDER_QUEUE
-      },
+    transport: Transport.RMQ,
+    options: {
+      urls: [configService.get('RABBITMQ_URL')],
+      queue: QueueConst.ORDER_QUEUE,
+    },
   });
 
   const options = new DocumentBuilder()
@@ -29,6 +29,10 @@ async function bootstrap() {
 
   await app.startAllMicroservicesAsync();
 
-  await app.listen(configService.get('PORT'), () => console.log(`Application is listening on port ${configService.get('PORT')}.`));
+  await app.listen(configService.get('PORT'), () =>
+    console.log(
+      `Application is listening on port ${configService.get('PORT')}.`,
+    ),
+  );
 }
 bootstrap();

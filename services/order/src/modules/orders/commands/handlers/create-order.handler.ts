@@ -5,9 +5,7 @@ import { CreateOrderCommand } from '../impl/create-order.command';
 
 @CommandHandler(CreateOrderCommand)
 export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
-  constructor(
-    private readonly publisher: EventPublisher,
-  ) {}
+  constructor(private readonly publisher: EventPublisher) {}
 
   async execute(command: CreateOrderCommand) {
     console.log(clc.greenBright('CreateOrderCommand...'));

@@ -18,40 +18,46 @@ const configService = new ConfigService(`.env.${process.env.NODE_ENV}`);
 export class OrdersSagas {
   constructor(
     private readonly paymentClientService: PaymentClientService,
-    @InjectQueue(BullQueueConst.ORDER_QUEUE_NAME) private readonly orderQueue: Queue
-  ) { }
+    @InjectQueue(BullQueueConst.ORDER_QUEUE_NAME)
+    private readonly orderQueue: Queue,
+  ) {}
 
   @Saga()
   orderCreated = (events$: Observable<any>): Observable<ICommand> => {
-    return events$
-      .pipe(
-        ofType(OrderCreatedEvent),
-        delay(1000),
-        map(event => {
-          console.log(clc.redBright('Inside [OrdersSagas] Saga'));
-          this.paymentClientService.publish(OrderMessagePattern.ORDER_CREATED, event);
-          return null;
-        }),
-      );
-  }
+    return events$.pipe(
+      ofType(OrderCreatedEvent),
+      delay(1000),
+      map(event => {
+        console.log(clc.redBright('Inside [OrdersSagas] Saga'));
+        this.paymentClientService.publish(
+          OrderMessagePattern.ORDER_CREATED,
+          event,
+        );
+        return null;
+      }),
+    );
+  };
 
   @Saga()
   orderUpdated = (events$: Observable<any>): Observable<ICommand> => {
-    return events$
-      .pipe(
-        ofType(OrderUpdatedEvent),
-        delay(1000),
-        map(event => {
-          console.log(clc.redBright('Inside [OrdersSagas] Saga'));
+    return events$.pipe(
+      ofType(OrderUpdatedEvent),
+      delay(1000),
+      map(event => {
+        console.log(clc.redBright('Inside [OrdersSagas] Saga'));
 
-          // After X amount of seconds confirmed orders should automatically be moved to the delivered 
-          if (event && event.state == OrderStateConst.CONFIRMED) {
-            this.orderQueue.add(BullQueueConst.DELIVER_ORDER_PROCESS, {
+        // After X amount of seconds confirmed orders should automatically be moved to the delivered
+        if (event && event.state == OrderStateConst.CONFIRMED) {
+          this.orderQueue.add(
+            BullQueueConst.DELIVER_ORDER_PROCESS,
+            {
               orderId: event.orderId,
-            }, { delay: Number(configService.get('AUTO_DELIVER_ORDER_TIME')) });
-          }
-          return null;
-        }),
-      );
-  }
+            },
+            { delay: Number(configService.get('AUTO_DELIVER_ORDER_TIME')) },
+          );
+        }
+        return null;
+      }),
+    );
+  };
 }

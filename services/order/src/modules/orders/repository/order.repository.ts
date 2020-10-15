@@ -6,7 +6,9 @@ import { CreateOrderDto } from '../interfaces/create-order-dto.interface';
 
 @Injectable()
 export class OrderRepository {
-  constructor(@InjectModel(Order.name) private orderModel: Model<OrderDocument>) {}
+  constructor(
+    @InjectModel(Order.name) private orderModel: Model<OrderDocument>,
+  ) {}
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
     const createdOrder = new this.orderModel(createOrderDto);
@@ -14,7 +16,7 @@ export class OrderRepository {
   }
 
   async updateByOrderId(orderDto): Promise<Order> {
-    return this.orderModel.updateOne({ orderId: orderDto.orderId}, orderDto);
+    return this.orderModel.updateOne({ orderId: orderDto.orderId }, orderDto);
   }
 
   async findAll(): Promise<Order[]> {

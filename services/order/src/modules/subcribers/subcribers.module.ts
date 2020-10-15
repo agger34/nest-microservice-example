@@ -3,8 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { SubcribersController } from './subcribers.controller';
 
 @Module({
-    imports: [CqrsModule],
-    controllers: [SubcribersController]
+  imports: [CqrsModule],
+  controllers: [SubcribersController],
 })
-
-export class SubcribersModule { }
+export class SubcribersModule {}

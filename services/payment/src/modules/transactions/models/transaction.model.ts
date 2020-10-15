@@ -6,7 +6,14 @@ export class Transaction extends AggregateRoot {
     super();
   }
 
-  createTransaction(orderId: string, productId: string, amount: number, state: string) {
-    this.apply(new TransactionCreatedEvent(this.txId, orderId, productId, amount, state));
+  createTransaction(
+    orderId: string,
+    productId: string,
+    amount: number,
+    state: string,
+  ) {
+    this.apply(
+      new TransactionCreatedEvent(this.txId, orderId, productId, amount, state),
+    );
   }
 }

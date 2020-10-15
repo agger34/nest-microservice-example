@@ -1,9 +1,5 @@
-import {
-  ApiProperty
-} from '@nestjs/swagger';
-import {
-  IsNotEmpty
-} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateTransactionDto {
   @ApiProperty({ type: String })
@@ -17,7 +13,7 @@ export class CreateTransactionDto {
   @ApiProperty({ type: String })
   @IsNotEmpty()
   productId: string;
-  
+
   @ApiProperty({ type: Number })
   @IsNotEmpty()
   amount: number;

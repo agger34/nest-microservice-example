@@ -36,7 +36,7 @@ const configService = new ConfigService(`.env.${process.env.NODE_ENV}`);
     ...EventHandlers,
     ...QueryHandlers,
     OrdersSagas,
-    OrderProcessor
+    OrderProcessor,
   ],
 })
 export class OrdersModule {}

@@ -1,3 +1,3 @@
-import { ReadOrderHandler } from "./read-order.handler";
+import { ReadOrderHandler } from './read-order.handler';
 
 export const QueryHandlers = [ReadOrderHandler];

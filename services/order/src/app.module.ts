@@ -11,7 +11,7 @@ const configService = new ConfigService(`.env.${process.env.NODE_ENV}`);
     MongooseModule.forRoot(configService.get('MONGODB_URL')),
     OrdersModule,
     PublishersModule,
-    SubcribersModule
+    SubcribersModule,
   ],
 })
 export class ApplicationModule {}

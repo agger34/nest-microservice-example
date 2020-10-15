@@ -9,7 +9,7 @@ export class OrderUpdatedHandler implements IEventHandler<OrderUpdatedEvent> {
   constructor(private readonly repository: OrderRepository) {}
   handle(event: OrderUpdatedEvent) {
     // TODO => save data in event store collection
-    
+
     console.log(clc.greenBright('OrderUpdatedEvent...'));
     this.repository.updateByOrderId(event);
   }

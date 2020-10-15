@@ -2,18 +2,12 @@ import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ReadOrderQuery } from './queries/impl';
 import { Order } from './models/order.model';
-import {
-  ApiOperation,
-  ApiResponse,
-  ApiTags
-} from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('query-orders')
 @Controller('query/orders')
 export class OrdersQueryController {
-  constructor(
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   @Get(':id')
   @ApiOperation({ summary: 'Read an order' })
