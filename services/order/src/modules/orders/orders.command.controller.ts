@@ -1,11 +1,10 @@
-import { BadRequestException, Body, Controller, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { UpdateOrderCommand } from './commands/impl/update-order.command';
 import { CreateOrderCommand } from './commands/impl/create-order.command';
 import { CreateOrderDto } from './interfaces/create-order-dto.interface';
 import { ReadOrderQuery } from './queries/impl';
 import { v4 as uuidv4 } from 'uuid';
-import { Order } from './models/order.model';
 import {
   ApiOperation,
   ApiResponse,
@@ -13,9 +12,9 @@ import {
 } from '@nestjs/swagger';
 import { OrderStateConst } from '../shared/constants/order-state.const';
 
-@ApiTags('orders')
-@Controller('orders')
-export class OrdersController {
+@ApiTags('command-orders')
+@Controller('command/orders')
+export class OrdersCommandController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
@@ -39,12 +38,5 @@ export class OrdersController {
       throw new BadRequestException();
     }
     return this.commandBus.execute(new UpdateOrderCommand(id, OrderStateConst.CANCELLED));
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Read an order' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Read an order.' })
-  async readOrder(@Param('id') id: string): Promise<Order> {
-    return this.queryBus.execute(new ReadOrderQuery(id));
   }
 }

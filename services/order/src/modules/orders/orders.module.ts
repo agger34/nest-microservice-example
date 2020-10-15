@@ -7,7 +7,8 @@ import { PublishersModule } from '../publishers/publishers.module';
 import { BullQueueConst } from '../shared/constants/bull-queue.const';
 import { CommandHandlers } from './commands/handlers';
 import { EventHandlers } from './events/handlers';
-import { OrdersController } from './orders.controller';
+import { OrdersCommandController } from './orders.command.controller';
+import { OrdersQueryController } from './orders.query.controller';
 import { QueryHandlers } from './queries/handlers';
 import { OrderProcessor } from './queues/order.processor';
 import { OrderRepository } from './repository/order.repository';
@@ -28,7 +29,7 @@ const configService = new ConfigService(`.env.${process.env.NODE_ENV}`);
       },
     }),
   ],
-  controllers: [OrdersController],
+  controllers: [OrdersCommandController, OrdersQueryController],
   providers: [
     OrderRepository,
     ...CommandHandlers,
