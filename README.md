@@ -15,11 +15,19 @@ This is an app that demonstrates how to use Nest.js to create a RESTful API micr
 ## Installation
 ```bash
 $ npm
+$ docker-compose
 ```
 
 ## Running the app
 ```bash
 # development
+
+## docker-compose => redis, mongodb, rabbit containers
+$ docker-compose up -d
+
+## apps
+$ npm install --global cross-env
+$ cd /services/service_name
 $ npm install
 $ npm run start
 ```
